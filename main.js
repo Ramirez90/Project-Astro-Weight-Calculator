@@ -38,21 +38,33 @@ const planets = [
     dropdown.appendChild(option);
 });
 
-    function calculateWeight(weight, planetName) { 
-        // 2. Write the code to return the correct weight  
+function calculateWeight(weight, planetName) {
+    // Finds the planet object in the array that matches the selection//Looks at each object and matches the planetName//
+    const planet = planets.find(p => p.name === planetName);
+    //If it finds a match, it saves that object//It takes the Earth weight and multiplies it by the selected planet gravity//
+    if (planet) {
+        return weight * planet.gravity;
     }
-    function handleClickEvent(e) {
-        // 3. Declare a variable called userWeight and assign the value of the user's weight. 
+    return 0;
+}//This function runs only when the user clicks the button//
+  function handleClickEvent(e) {
+    // 3. Gets the user's weight from the input field//
+    const userWeight = document.getElementById("user-weight").value;
 
-        // 4. Delcare a variable called planetName and assign the name of the selected planet from the drop down. 
+    // 4. Gets the selected planet name from the dropdown//
+    const planetName = document.getElementById("planetDropdown").value;
 
-        // 5. Declare a variable called result and assign the value of the new calculated weight. 
+    // 5. Calculates the result using the function//
+    const result = calculateWeight(userWeight, planetName);
 
-        // 6. Write code to display the message shown in the screenshot. 
+    // 6. Displays the message// Hooks HTML <p id="output"></p>//
+    document.getElementById("output").textContent = 
+        `If you were on ${planetName}, you would weigh ${result.toFixed(2)}lbs!`;
 
     } 
 
-        // 7. Set the #calculate-button element's onclick method to use the handleClickEvent function.
+       // 7. Attach the click event to the button
+     document.getElementById("calculate-button").onclick = handleClickEvent;
 
         // 8. Make it look nice by attaching  a style.css file to your index.html and writing some basic styling, 
         // feel free to add classes and id's to the HTML elements as you need, 
